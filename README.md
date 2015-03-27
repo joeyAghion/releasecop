@@ -12,7 +12,7 @@ Open the manifest file, which defines projects to monitor:
 
     releasecop edit
 
-In the manifest, each project lists the repositories/branches to whch code is deployed _in order of promotion_. E.g., master branch for development, a heroku remote for staging, and a different heroku remote for production. An example manifest:
+In the manifest, each project lists the repositories/branches to which code is deployed _in order of promotion_. E.g., master branch for development, a heroku remote for staging, and a different heroku remote for production. An example manifest:
 
     {
       "projects": {
