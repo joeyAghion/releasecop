@@ -49,4 +49,4 @@ To check all projects:
 
     releasecop check --all
 
-Copyright (c) 2015 Joey Aghion
+Copyright (c) 2015 Joey Aghion, Artsy
