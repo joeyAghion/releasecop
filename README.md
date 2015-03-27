@@ -12,7 +12,7 @@ Open the manifest file, which defines projects to monitor:
 
     releasecop edit
 
-In the manifest, each project lists the repositories/branches to which code is deployed _in order of promotion_. E.g., master branch for development, a heroku remote for staging, and a different heroku remote for production. An example manifest:
+In the manifest, each project lists the environments to which code is deployed _in order of promotion_. Environments are defined by a `name` and `git` remote. E.g., a github repo for development and heroku apps for staging and production. Optionally, an environment can include a `branch`. E.g.:
 
     {
       "projects": {
@@ -21,9 +21,10 @@ In the manifest, each project lists the repositories/branches to which code is d
           {"name": "staging", "git": "git@heroku.com:charge-staging.git"},
           {"name": "production", "git": "git@heroku.com:charge-production.git"}
         ],
-        "lattice": [
-          {"name": "master", "git": "git@github.com:artsy/lattice.git"},
-          {"name": "production", "git": "git@heroku.com:artsy-lattice-production.git"}
+        "heat": [
+          {"name": "master", "git": "git@github.com:artsy/heat.git"},
+          {"name": "master-succeeded", "git": "git@github.com:artsy/heat.git", "branch": "master-succeeded"},
+          {"name": "production", "git": "git@github.com:artsy/heat.git", "branch": "production"}
         ]
       }
     }
@@ -37,12 +38,14 @@ Example output:
     charge...
       staging is up-to-date with master
       production is up-to-date with staging
-    lattice...
-      production is behind master by:
-        4557f60 2015-02-02 upgrade to 3.9 (joeschmo19)
+    heat...
+      master-succeeded is up-to-date with master
+      production is behind master-succeeded by:
+        4557f60 2015-03-24 Upgrade to 3.9 (timsmith)
+        f33acc4 2015-03-25 Add support for avatars (janeR)
     2 project(s) checked. 1 environment(s) out-of-date.
 
-To check all:
+To check all projects:
 
     releasecop check --all
 
