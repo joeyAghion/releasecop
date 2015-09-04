@@ -38,7 +38,7 @@ module Releasecop
     end
 
     def initialize_dir!
-      FileUtils.mkdir_p(Release::CONFIG_DIR)
+      FileUtils.mkdir_p(Releasecop::CONFIG_DIR)
     end
 
     def initialize_manifest!
