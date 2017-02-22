@@ -49,4 +49,9 @@ To check all projects:
 
     releasecop check --all
 
+### Heroku Pipelines
+
+At this time releasecop is not compatible with projects using [Heroku Pipelines](https://devcenter.heroku.com/articles/pipelines) to promote apps. For these apps, promoting a staging app to production simply copies the slug to the production app, so no git remote is updated.
+
+
 Copyright (c) 2015 Joey Aghion, Artsy
