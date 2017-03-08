@@ -22,11 +22,14 @@ module Releasecop
       selected = options[:all] ? manifest['projects'] : manifest['projects'].select{|k,v| k == project }
       raise Thor::Error, "No projects found." if selected.empty?
 
-      unreleased = 0
-      selected.each do |name, envs|
-        unreleased += Releasecop::Checker.new(name, envs).check
+      checkers = selected.map { |name, envs| Releasecop::Checker.new(name, envs) }
+
+      for checker in checkers
+        checker.check
+        checker.puts_message(options[:verbose])
       end
 
+      unreleased = checkers.map(&:unreleased).inject(&:+)
       $stderr.puts "#{selected.size} project(s) checked. #{unreleased} environment(s) out-of-date."
       exit 1 if unreleased > 0
     end

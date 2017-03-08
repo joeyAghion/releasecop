@@ -7,31 +7,33 @@ module Releasecop
       self.envs = envs
     end
 
-    # Reports status of individual project. Returns count of out-of-date environments.
     def check
-      puts "#{name}..."
-      unreleased = 0
       Dir.chdir(CONFIG_DIR) do
         `git clone #{envs.first['git']} --bare #{name} > /dev/null 2>&1`
+
         Dir.chdir(name) do
           envs.each do |env|
             `git remote add #{env['name']} #{env['git']} > /dev/null 2>&1`
             `git fetch #{env['name']} > /dev/null 2>&1`
           end
+
+          comparisons = []
           envs.each_cons(2) do |ahead, behind|
-            log = `git log #{behind['name']}/#{behind['branch'] || 'master'}..#{ahead['name']}/#{ahead['branch'] || 'master'} --pretty=format:"%h %ad %s (%an)" --date=short --no-merges`
-            if log == ''
-              puts "  #{behind['name']} is up-to-date with #{ahead['name']}\n"
-            else
-              puts "  #{behind['name']} is behind #{ahead['name']} by:"
-              log.lines.each { |l| puts "    #{l}" }
-              unreleased += 1
-            end
+            comparisons << Comparison.new(ahead, behind)
           end
+
+          comparisons.each &:check
+          @result = Result.new(name, comparisons)
         end
       end
-      unreleased
     end
 
+    def puts_message(verbose_flag)
+      @result.puts_message(verbose_flag)
+    end
+
+    def unreleased
+      @result.unreleased
+    end
   end
 end

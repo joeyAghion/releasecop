@@ -2,6 +2,8 @@ require "releasecop/version"
 require 'thor'
 require 'shellwords'
 require 'json'
+require "releasecop/comparison"
+require "releasecop/result"
 require "releasecop/checker"
 require "releasecop/cli"
 
