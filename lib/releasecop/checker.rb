@@ -28,8 +28,8 @@ module Releasecop
       end
     end
 
-    def message
-      @result.message
+    def puts_message(verbose_flag)
+      @result.puts_message(verbose_flag)
     end
 
     def unreleased

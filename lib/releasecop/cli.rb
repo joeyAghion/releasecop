@@ -26,7 +26,7 @@ module Releasecop
 
       for checker in checkers
         checker.check
-        puts checker.message
+        checker.puts_message(options[:verbose])
       end
 
       unreleased = checkers.map(&:unreleased).inject(&:+)

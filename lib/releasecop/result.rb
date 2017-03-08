@@ -4,8 +4,12 @@ class Result
     @comparisons = comparisons
   end
 
-  def message
-    [header, *comparison_messages].join "\n"
+  def puts_message(verbose_flag)
+    if verbose_flag
+      puts message
+    else
+      puts message if unreleased?
+    end
   end
 
   def unreleased
@@ -14,8 +18,16 @@ class Result
 
   private
 
+  def message
+    [header, *comparison_messages].join "\n"
+  end
+
   def header
     "#{@name}..."
+  end
+
+  def unreleased?
+    unreleased > 0
   end
 
   def comparison_messages
