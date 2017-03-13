@@ -14,7 +14,8 @@ module Releasecop
     end
 
     desc "check [PROJECT]", "Check the release status of one or all projects"
-    option :all
+    option :all, desc: 'Check all projects listed in manifest'
+    option :verbose, desc: 'Output results for up-to-date projects'
     def check(project = nil)
       raise Thor::Error, "Must specify a PROJECT or --all" if project.nil? && !options[:all]
 
