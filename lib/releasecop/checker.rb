@@ -1,5 +1,9 @@
 module Releasecop
   class Checker
+    DEPLOY_STYLES = [
+      HOKUSAI = 'hokusai',
+      GIT = 'git'
+    ]
     attr_accessor :name, :envs
 
     def initialize(name, envs)
@@ -19,7 +23,13 @@ module Releasecop
 
           comparisons = []
           envs.each_cons(2) do |ahead, behind|
-            comparisons << Comparison.new(ahead, behind)
+            comparisons <<
+              case deploy_style
+              when HOKUSAI
+                Comparer::Hokusai.new
+              when GIT
+                Comparer::Git.new(ahead, behind)
+              end
           end
 
           comparisons.each &:check
@@ -34,6 +44,10 @@ module Releasecop
 
     def unreleased
       @result.unreleased
+    end
+
+    def deploy_style
+      Dir.exist?('hokusai') ? HOKUSAI : GIT
     end
   end
 end
