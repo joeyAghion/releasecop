@@ -4,17 +4,17 @@ module Releasecop
 
     def initialize(name, envs)
       self.name = name
-      self.envs = envs
+      self.envs = envs.map { |e| ManifestItem.new(name, e) }
     end
 
     def check
       Dir.chdir(CONFIG_DIR) do
-        `git clone #{envs.first['git']} --bare #{name} > /dev/null 2>&1`
+        `git clone #{envs.first.git} --bare #{name} > /dev/null 2>&1`
 
         Dir.chdir(name) do
           envs.each do |env|
-            `git remote add #{env['name']} #{env['git']} > /dev/null 2>&1`
-            `git fetch #{env['name']} > /dev/null 2>&1`
+            `git remote add #{env.name} #{env.git} > /dev/null 2>&1`
+            `git fetch #{env.name} > /dev/null 2>&1`
           end
 
           comparisons = []
