@@ -10,8 +10,8 @@ class ManifestItem
   end
 
   def for_rev_range
-    sha = find_hokusai_sha if @hokusai_tag
-    sha || [@name, @branch].join('/')
+    @sha ||= find_hokusai_sha if @hokusai_tag
+    @sha || [@name, @branch].join('/')
   end
 
   private
