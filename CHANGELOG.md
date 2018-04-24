@@ -3,6 +3,11 @@
 
 * Your contribution here.
 
+0.0.6 (2018-04-24)
+------------------
+
+* Fix transposed `git log` arguments ([@joeyAghion](https://github.com/joeyAghion))
+
 0.0.5 (2018-04-24)
 ------------------
 
