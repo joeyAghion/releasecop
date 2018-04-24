@@ -9,7 +9,7 @@ module Releasecop
 
     def check
       Dir.chdir(CONFIG_DIR) do
-        `git clone #{envs.first.git} #{envs.first.hokusai_tag ? '' : '--bare'} #{name} > /dev/null 2>&1`
+        `git clone #{envs.first.git} #{'--bare' if envs.none?{|e| e.hokusai_tag }} #{name} > /dev/null 2>&1`
 
         Dir.chdir(name) do
           envs.each do |env|
