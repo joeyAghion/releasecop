@@ -12,7 +12,7 @@ Open the manifest file, which defines projects to monitor:
 
     releasecop edit
 
-In the manifest, each project lists the environments to which code is deployed _in order of promotion_. Environments are defined by a `name` and `git` remote. E.g., a github repo for development and heroku apps for staging and production. Optionally, an environment can include a `branch`. E.g.:
+In the manifest, each project lists the environments to which code is deployed _in order of promotion_. Environments are defined by a `name` and `git` remote. E.g., a github repo for development and heroku apps for staging and production. Optionally, an environment can include `branch` or `hokusai` properties. E.g.:
 
     {
       "projects": {
@@ -54,22 +54,19 @@ To check all projects:
 At this time releasecop is not compatible with projects using [Heroku Pipelines](https://devcenter.heroku.com/articles/pipelines) to promote apps. For these apps, promoting a staging app to production simply copies the slug to the production app, so no git remote is updated.
 
 ### Hokusai Pipelines
-[Hokusai](https://github.com/artsy/hokusai) is a tool developed by Artsy's engineering used for managing apps on [Kubernetes](https://kubernetes.io/). Releasecop supports Hokusai-based apps. In order for this to work, you need to make sure Hokusai is installed on the machine running releasecop by:
-```shell
-brew install hokusai
-```
-You also need to make sure Hokusai is setup properly on that machine and has access to ECR by following setup steps on Hokusai.
-In order to make an app enabled for hokusai check, make sure that in your manifest file when you define an environment, also mention what image tag this deployment uses on K8s. For example in following `manifest.json` example:
+
+[Hokusai](https://github.com/artsy/hokusai) is a tool developed by Artsy for managing apps on [Kubernetes](https://kubernetes.io/). Releasecop's manifest can include environments with a `hokusai` property containing a docker image tag corresponding to the pipeline stage. (The `hokusai` executable and access to the image repository must be available locally.) E.g.:
+
 ```json
-# manifest.json
 {
     "test-api": [
+      {"name": "master", "git": "git@github.com:artsy/test-api.git" },
       {"name": "staging", "git": "git@github.com:artsy/test-api.git", "hokusai": "staging"},
       {"name": "production", "git": "git@github.com:artsy/test-api.git", "hokusai": "production"}
     ]
 }
 ```
-We define that our deployment has two environments, `staging` and `production` and `staging` deployment uses `staging` as image tag deployed on k8s and `production` uses `production` image tag.
 
+Releasecop will determine the git SHAs corresponding with each pipeline stage via the `hokusai registry images` command.
 
-Copyright (c) 2015 Joey Aghion, Artsy
+Copyright (c) 2015-2018 Joey Aghion, Artsy
