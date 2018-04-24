@@ -31,6 +31,14 @@ class Result
   end
 
   def comparison_messages
-    @comparisons.map &:message
+    @comparisons.map do |comparison|
+      summary = if comparison.unreleased?
+        "  #{comparison.behind.name} is behind #{comparison.ahead.name} by:\n"
+      else
+        "  #{comparison.behind.name} is up-to-date with #{comparison.ahead.name}"
+      end
+      detailed_messages = comparison.lines.map { |l| "    #{l}" }
+      [summary, *detailed_messages].join
+    end
   end
 end
