@@ -17,6 +17,6 @@ class Comparison
   private
 
   def log
-    `git log #{@ahead.for_rev_range}..#{@behind.for_rev_range} --pretty=format:"%h %ad %s (%an)" --date=short --no-merges`
+    `git log #{@behind.for_rev_range}..#{@ahead.for_rev_range} --pretty=format:"%h %ad %s (%an)" --date=short --no-merges`
   end
 end
