@@ -1,6 +1,7 @@
 (Next)
 ------------
 
+* Support `tag_pattern` expressions for matching git tags (fixes [#6](https://github.com/joeyAghion/releasecop/issues/6), [@joeyAghion](https://github.com/joeyAghion))
 * Your contribution here.
 
 0.0.6 (2018-04-24)

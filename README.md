@@ -69,4 +69,21 @@ At this time releasecop is not compatible with projects using [Heroku Pipelines]
 
 Releasecop will determine the git SHAs corresponding with each pipeline stage via the `hokusai registry images` command.
 
+### Tagged Releases
+
+Many teams create git tags corresponding to each milestone or release. The `tag_pattern` property can be used to match sets of tags corresponding to an environment. E.g.:
+
+```json
+{
+    "causality": [
+      {"name": "master", "git": "git@github.com:artsy/causality.git" },
+      {"name": "staging", "git": "git@github.com:artsy/causality.git", "tag_pattern": "staging-*"},
+      {"name": "production", "git": "git@github.com:artsy/causality.git", "tag_pattern": "release-*"}
+    ]
+}
+```
+
+The most recent commit matching each tag expression is presumed to correspond with the state of each environment. Tag patterns follow `git` conventions, so, e.g., `staging-*` will be treated as `/refs/tags/staging-*`.
+
+
 Copyright (c) 2015-2018 Joey Aghion, Artsy
