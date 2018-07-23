@@ -1,5 +1,7 @@
 module Releasecop
   class Cli < Thor
+    map %w[--version -v] => :version
+
     def self.exit_on_failure?
       true
     end
@@ -33,6 +35,11 @@ module Releasecop
       unreleased = checkers.map(&:unreleased).inject(&:+)
       $stderr.puts "#{selected.size} project(s) checked. #{unreleased} environment(s) out-of-date."
       exit 1 if unreleased > 0
+    end
+
+    desc "--version, -v", "Print the version"
+    def version
+      puts Releasecop::VERSION
     end
 
     private
