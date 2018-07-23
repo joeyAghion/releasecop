@@ -3,6 +3,10 @@
 
 * Your contribution here.
 
+0.0.8 (2018-07-23)
+---
+* Add `--version` command
+
 0.0.7 (2018-06-15)
 ---
 * Support `tag_pattern` expressions for matching git tags (fixes [#6](https://github.com/joeyAghion/releasecop/issues/6), [@joeyAghion](https://github.com/joeyAghion))
