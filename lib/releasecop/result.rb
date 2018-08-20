@@ -1,5 +1,7 @@
 module Releasecop
   class Result
+    attr_accessor :name, :comparisons
+
     def initialize(name, comparisons)
       @name = name
       @comparisons = comparisons
