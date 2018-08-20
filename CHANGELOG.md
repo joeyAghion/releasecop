@@ -1,7 +1,8 @@
 (Next)
 ------------
 
-* Your contribution here.
+* Properly namespace internal classes.
+* Your contribution here...
 
 0.0.8 (2018-07-23)
 ---

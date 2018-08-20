@@ -4,7 +4,7 @@ module Releasecop
 
     def initialize(name, envs)
       self.name = name
-      self.envs = envs.map { |e| ManifestItem.new(name, e) }
+      self.envs = envs.map { |e| Releasecop::ManifestItem.new(name, e) }
     end
 
     def check
@@ -19,11 +19,11 @@ module Releasecop
 
           comparisons = []
           envs.each_cons(2) do |ahead, behind|
-            comparisons << Comparison.new(ahead, behind)
+            comparisons << Releasecop::Comparison.new(ahead, behind)
           end
 
           comparisons.each &:check
-          @result = Result.new(name, comparisons)
+          @result = Releasecop::Result.new(name, comparisons)
         end
       end
     end

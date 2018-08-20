@@ -1,22 +1,24 @@
-class Comparison
-  attr_accessor :lines, :behind, :ahead
+module Releasecop
+  class Comparison
+    attr_accessor :lines, :behind, :ahead
 
-  def initialize(ahead, behind)
-    @ahead = ahead
-    @behind = behind
-  end
+    def initialize(ahead, behind)
+      @ahead = ahead
+      @behind = behind
+    end
 
-  def check
-    @lines = log.lines
-  end
+    def check
+      @lines = log.lines
+    end
 
-  def unreleased?
-    !lines.empty?
-  end
+    def unreleased?
+      !lines.empty?
+    end
 
-  private
+    private
 
-  def log
-    `git log #{@behind.for_rev_range}..#{@ahead.for_rev_range} --pretty=format:"%h %ad %s (%an)" --date=short --no-merges`
+    def log
+      `git log #{@behind.for_rev_range}..#{@ahead.for_rev_range} --pretty=format:"%h %ad %s (%an)" --date=short --no-merges`
+    end
   end
 end
