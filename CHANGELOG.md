@@ -1,8 +1,13 @@
 (Next)
 ------------
 
-* Properly namespace internal classes.
 * Your contribution here...
+
+0.0.9 (2018-08-20)
+------------
+
+* Properly namespace internal classes (5439cc9)
+* Expose `Result#name` and `#comparisons` (2ea111c)
 
 0.0.8 (2018-07-23)
 ---
