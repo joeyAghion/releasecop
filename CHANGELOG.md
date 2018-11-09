@@ -1,7 +1,10 @@
 (Next)
 ------------
-
 * Your contribution here...
+
+0.0.10 (2018-11-09)
+---
+* Allow working directory to be overridden (d728567)
 
 0.0.9 (2018-08-20)
 ------------
