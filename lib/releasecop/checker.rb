@@ -1,14 +1,15 @@
 module Releasecop
   class Checker
-    attr_accessor :name, :envs
+    attr_accessor :name, :envs, :working_dir
 
-    def initialize(name, envs)
+    def initialize(name, envs, working_dir = Releasecop::CONFIG_DIR)
       self.name = name
       self.envs = envs.map { |e| Releasecop::ManifestItem.new(name, e) }
+      self.working_dir = working_dir
     end
 
     def check
-      Dir.chdir(CONFIG_DIR) do
+      Dir.chdir(working_dir) do
         `git clone #{envs.first.git} #{'--bare' if envs.all?(&:bare_clone?)} #{name} > /dev/null 2>&1`
 
         Dir.chdir(name) do
