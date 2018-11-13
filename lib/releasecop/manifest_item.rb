@@ -23,10 +23,6 @@ module Releasecop
 
     private
 
-    def working_dir
-      "#{@repo_name}-#{@name}-working"
-    end
-
     def find_hokusai_sha
       images_output = `hokusai registry images`
       tags = images_output.lines.grep(/\d{4}.* | .* | .*/).map{|l| l.split(' | ').last.split(',').map(&:strip)}
