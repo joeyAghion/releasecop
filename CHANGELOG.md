@@ -2,6 +2,10 @@
 ------------
 * Your contribution here...
 
+0.0.13 (2018-11-15)
+---
+* Add email to diff output (081d270)
+
 0.0.12 (2018-11-14)
 ---
 * (Fixes)
