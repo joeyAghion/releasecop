@@ -2,6 +2,10 @@
 ------------
 * Your contribution here...
 
+0.0.11 (2018-11-14)
+---
+* Allow AWS credentials to be customized per manifest item (e6397b4)
+
 0.0.10 (2018-11-09)
 ---
 * Allow working directory to be overridden (d728567)
