@@ -1,6 +1,6 @@
 module Releasecop
   class ManifestItem
-    OPTION_KEYS = %w[hokusai tag_pattern, aws_access_key_id, aws_secret_access_key]
+    OPTION_KEYS = %w[hokusai tag_pattern aws_access_key_id aws_secret_access_key]
     attr_reader :git, :branch, :name
 
     def initialize(repo_name, item)
