@@ -18,7 +18,7 @@ module Releasecop
     private
 
     def log
-      `git log #{@behind.for_rev_range}..#{@ahead.for_rev_range} --pretty=format:"%h %ad %s (%an)" --date=short --no-merges`
+      `git log #{@behind.for_rev_range}..#{@ahead.for_rev_range} --pretty=format:"%h %ad %s (%an, %ae)" --date=short --no-merges`
     end
   end
 end
