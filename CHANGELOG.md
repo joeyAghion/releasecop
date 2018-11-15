@@ -2,6 +2,10 @@
 ------------
 * Your contribution here...
 
+0.0.12 (2018-11-14)
+---
+* (Fixes)
+
 0.0.11 (2018-11-14)
 ---
 * Allow AWS credentials to be customized per manifest item (e6397b4)
