@@ -2,6 +2,10 @@
 ------------
 * Your contribution here...
 
+0.0.14 (2019-01-07)
+---
+* Fix `tag_pattern`-matching to respect annotated tags (c7eda3599)
+
 0.0.13 (2018-11-15)
 ---
 * Add email to diff output (081d270)
