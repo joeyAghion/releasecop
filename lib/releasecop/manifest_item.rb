@@ -30,7 +30,7 @@ module Releasecop
     end
 
     def find_tag_pattern_sha
-      `git for-each-ref --format='%(objectname)' --count=1 --sort=-authordate --sort=-committerdate 'refs/tags/#{@options['tag_pattern']}'`.strip
+      `git for-each-ref --format='%(objectname)' --count=1 --sort=-authordate --sort=-committerdate --sort=-creatordate 'refs/tags/#{@options['tag_pattern']}'`.strip
     end
 
     # not thread-safe
