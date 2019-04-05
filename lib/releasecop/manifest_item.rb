@@ -24,9 +24,11 @@ module Releasecop
     private
 
     def find_hokusai_sha
-      images_output = with_aws_env { `hokusai registry images` }
-      tags = images_output.lines.grep(/\d{4}.* | .* | .*/).map{|l| l.split(' | ').last.split(',').map(&:strip)}
-      tags.detect{|t| t.include?(@options['hokusai']) }.detect{|t| t[/^[0-9a-f]{40}$/]}
+      images_output = with_aws_env { `hokusai registry images --limit 1000` } # list as many items as possible
+      tags = images_output.lines.grep(/\d{4}.* \| .*/).map do |l| # lines listing images
+        l.split(' | ').last.gsub(/\e\[(\d+)(\;\d+)*m/, '').split(',').map(&:strip) # tags
+      end
+      tags.detect{|t| t.include?(@options['hokusai']) }.detect{|t| t[/^[0-9a-f]{40}$/]} # first SHA-seeming tag matching environment
     end
 
     def find_tag_pattern_sha
