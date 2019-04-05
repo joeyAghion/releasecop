@@ -2,6 +2,10 @@
 ------------
 * Your contribution here...
 
+0.0.15 (2019-04-05)
+---
+* Update for compatibility with hokusai >=0.5.4 (now incompatible with earlier versions) (57ee7ae56)
+
 0.0.14 (2019-01-07)
 ---
 * Fix `tag_pattern`-matching to respect annotated tags (c7eda3599)
