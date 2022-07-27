@@ -1,6 +1,7 @@
 (Next)
 ------------
 * Update README to document both master and main branch approaches.
+* Require fileutils (fixes uninitialized constant Releasecop::Cli::FileUtils (NameError))
 * Your contribution here...
 
 0.0.15 (2019-04-05)

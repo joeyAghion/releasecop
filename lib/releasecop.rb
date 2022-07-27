@@ -1,3 +1,4 @@
+
 require "releasecop/version"
 require 'thor'
 require 'shellwords'
@@ -6,6 +7,7 @@ require 'releasecop/manifest_item'
 require "releasecop/comparison"
 require "releasecop/result"
 require "releasecop/checker"
+require 'fileutils'
 require "releasecop/cli"
 
 module Releasecop
