@@ -22,8 +22,8 @@ In the manifest, each project lists the environments to which code is deployed _
           {"name": "production", "git": "git@heroku.com:charge-production.git"}
         ],
         "heat": [
-          {"name": "master", "git": "git@github.com:artsy/heat.git"},
-          {"name": "master-succeeded", "git": "git@github.com:artsy/heat.git", "branch": "master-succeeded"},
+          {"name": "main", "git": "git@github.com:artsy/heat.git", "branch": "main"},
+          {"name": "succeeded", "git": "git@github.com:artsy/heat.git", "branch": "succeeded"},
           {"name": "production", "git": "git@github.com:artsy/heat.git", "branch": "production"}
         ]
       }
@@ -39,8 +39,8 @@ Example output:
       staging is up-to-date with master
       production is up-to-date with staging
     heat...
-      master-succeeded is up-to-date with master
-      production is behind master-succeeded by:
+      succeeded is up-to-date with main
+      production is behind succeeded by:
         4557f60 2015-03-24 Upgrade to 3.9 (timsmith)
         f33acc4 2015-03-25 Add support for avatars (janeR)
     2 project(s) checked. 1 environment(s) out-of-date.
@@ -76,7 +76,7 @@ Many teams create git tags corresponding to each milestone or release. The `tag_
 ```json
 {
     "causality": [
-      {"name": "master", "git": "git@github.com:artsy/causality.git" },
+      {"name": "main", "git": "git@github.com:artsy/causality.git", "branch": "main" },
       {"name": "staging", "git": "git@github.com:artsy/causality.git", "tag_pattern": "staging-*"},
       {"name": "production", "git": "git@github.com:artsy/causality.git", "tag_pattern": "release-*"}
     ]
@@ -85,5 +85,8 @@ Many teams create git tags corresponding to each milestone or release. The `tag_
 
 The most recent commit matching each tag expression is presumed to correspond with the state of each environment. Tag patterns follow `git` conventions, so, e.g., `staging-*` will be treated as `/refs/tags/staging-*`.
 
+### A note about default branch names
+
+For backwards compatibility, `releasecop` assumes a default branch name of `master`. To override this behavior, set the `RELEASECOP_DEFAULT_BRANCH` environment variable (to e.g. `main`).
 
 Copyright (c) 2015-2018 Joey Aghion, Artsy

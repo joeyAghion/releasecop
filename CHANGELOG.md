@@ -1,5 +1,6 @@
 (Next)
 ------------
+* Update README to document both master and main branch approaches.
 * Your contribution here...
 
 0.0.15 (2019-04-05)

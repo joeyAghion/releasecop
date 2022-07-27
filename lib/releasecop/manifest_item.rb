@@ -7,7 +7,7 @@ module Releasecop
       @repo_name = repo_name
       @git = item['git']
       @name = item['name']
-      @branch = item['branch'] || 'master'
+      @branch = item['branch'] || ENV['RELEASECOP_DEFAULT_BRANCH'] || 'master'
       @options = item.select { |k, _v| OPTION_KEYS.include?(k) }
     end
 
