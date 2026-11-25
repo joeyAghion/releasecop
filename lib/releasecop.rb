@@ -3,6 +3,7 @@ require "releasecop/version"
 require 'thor'
 require 'shellwords'
 require 'json'
+require 'pathname'
 require 'releasecop/manifest_item'
 require "releasecop/comparison"
 require "releasecop/result"
