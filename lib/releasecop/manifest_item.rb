@@ -1,6 +1,6 @@
 module Releasecop
   class ManifestItem
-    OPTION_KEYS = %w[hokusai tag_pattern aws_access_key_id aws_secret_access_key]
+    OPTION_KEYS = %w[hokusai path tag_pattern aws_access_key_id aws_secret_access_key]
     attr_reader :git, :branch, :name
 
     def initialize(repo_name, item)
@@ -24,11 +24,24 @@ module Releasecop
     private
 
     def find_hokusai_sha
-      images_output = with_aws_env { `hokusai registry images --limit 1000` } # list as many items as possible
+      images_output = in_path { with_aws_env { `hokusai registry images --limit 1000` } } # list as many items as possible
       tags = images_output.lines.grep(/\d{4}.* \| .*/).map do |l| # lines listing images
         l.split(' | ').last.gsub(/\e\[(\d+)(\;\d+)*m/, '').split(',').map(&:strip) # tags
       end
       tags.detect{|t| t.include?(@options['hokusai']) }.detect{|t| t[/^[0-9a-f]{40}$/]} # first SHA-seeming tag matching environment
+    end
+
+    # Runs the block in the configured subdirectory of the repo (where the project's hokusai/ config lives), if any.
+    def in_path(&block)
+      path = @options['path'].to_s
+      return yield if path.empty? || path == '.'
+
+      if Pathname.new(path).absolute? || Pathname.new(path).cleanpath.each_filename.include?('..')
+        raise ArgumentError, "path must be relative to the repo root: #{path}"
+      end
+      raise ArgumentError, "path not found in #{@repo_name} repo: #{path}" unless File.directory?(path)
+
+      Dir.chdir(path, &block)
     end
 
     def find_tag_pattern_sha

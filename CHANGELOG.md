@@ -1,5 +1,6 @@
 (Next)
 ------------
+* Add `path` option for environments with `hokusai`, to run hokusai from a subdirectory of the repo.
 * Your contribution here...
 
 0.0.16 (2022-07-27)

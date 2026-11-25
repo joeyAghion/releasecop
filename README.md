@@ -69,6 +69,14 @@ At this time releasecop is not compatible with projects using [Heroku Pipelines]
 
 Releasecop will determine the git SHAs corresponding with each pipeline stage via the `hokusai registry images` command.
 
+If the project's hokusai configuration doesn't live at the top level of the repo (e.g., in a monorepo), add a `path` property with the subdirectory containing its `hokusai/` directory. `hokusai` commands will be run from there:
+
+```json
+{"name": "production", "git": "git@github.com:artsy/artsy-agent.git", "hokusai": "production", "path": "apps/agent-web"}
+```
+
+Note that `path` only affects where hokusai is run; comparisons still cover every commit in the repo.
+
 ### Tagged Releases
 
 Many teams create git tags corresponding to each milestone or release. The `tag_pattern` property can be used to match sets of tags corresponding to an environment. E.g.:
